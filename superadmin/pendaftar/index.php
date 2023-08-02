@@ -1,28 +1,29 @@
 <?php
 session_start();
 include '../../koneksi.php';
-if($_SESSION['status']==""){
-	header("location:../../index.php?pesan=belum_login");
+if ($_SESSION['status'] == "") {
+    header("location:../../index.php?pesan=belum_login");
+} else if ($_SESSION['status'] != "admin") {
+    header("location:../../index.php?pesan=belum_admin");
 }
-else if($_SESSION['status']!="admin"){
-	header("location:../../index.php?pesan=belum_admin");
-} 
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Sistem Monitoring Magang</title>
+    <title>Sistem Monitoring Magang</title>
     <meta name="description" content="Sistem Monitoring Magang">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="../../img/logo.png">
     <link rel="shortcut icon" href="../../img/logo.png">
-	<link rel="icon" type="image/png" href="../../img/logo.png">
+    <link rel="icon" type="image/png" href="../../img/logo.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -39,6 +40,7 @@ else if($_SESSION['status']!="admin"){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
 
@@ -51,30 +53,40 @@ else if($_SESSION['status']!="admin"){
                     </li>
                     <li class="menu-title">Master Data</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href= "#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-sitemap"></i>Master Data</a>
-                        <ul class="sub-menu children dropdown-menu">  
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-sitemap"></i>Master Data</a>
+                        <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-users"></i><a href="#">&nbsp;Pendaftar</a></li>
-                            <li><i class="fa fa-users"></i><a href="../peserta/">&nbsp;Peserta</a></li>	
-							<li><i class="fa fa-user"></i><a href="../bidang/">&nbsp;Bidang</a></li>							
-							<li><i class="fa fa-user"></i><a href="../kategori_p/">&nbsp;Kategori Peserta</a></li>
+                            <li><i class="fa fa-users"></i><a href="../peserta/">&nbsp;Peserta</a></li>
+                            <li><i class="fa fa-user"></i><a href="../bidang/">&nbsp;Bidang</a></li>
+                            <li><i class="fa fa-user"></i><a href="../kategori_p/">&nbsp;Kategori Peserta</a></li>
                             <li><i class="fa fa-user"></i><a href="../kategori_l/">&nbsp;Kategori Laporan</a></li>
                         </ul>
                     </li>
-					<li class="menu-title">Monitoring</li><!-- /.menu-title -->
+                    <li class="menu-title">Monitoring</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href= "#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Monitoring</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Monitoring</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-users"></i><a href="../mon_pendaftar/">&nbsp;Pendaftar</a></li>
                             <li><i class="fa fa-users"></i><a href="../mon_peserta/">&nbsp;Peserta</a></li>
-							<li><i class="fa fa-tag"></i><a href="../mon_laporan/">&nbsp;Laporan</a></li>
+                            <li><i class="fa fa-tag"></i><a href="../mon_laporan/">&nbsp;Laporan</a></li>
                         </ul>
                     </li>
-					<li class="menu-title">Rekap</li><!-- /.menu-title -->
+                    <li class="menu-title">Rekap</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href= "#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Rekap</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Rekap</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/">&nbsp;Laporan Disetujui</a></li>
-							<li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/index2.php">&nbsp;Laporan Ditolak</a></li> </ul>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/index2.php">&nbsp;Laporan Ditolak</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">Laporan</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Laporan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditerima.php">&nbsp;Laporan Pendaftara Peserta Magang Diterima</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditolak.php">&nbsp;Laporan Peserta Magang Ditolak</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaperperiode.php">&nbsp;Laporan Peserta Magang Perperiode</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -110,7 +122,7 @@ else if($_SESSION['status']!="admin"){
             </div>
         </header><!-- /header -->
         <!-- Header-->
-		<br>
+        <br>
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
@@ -135,7 +147,7 @@ else if($_SESSION['status']!="admin"){
                 </div>
             </div>
         </div>
-		
+
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
@@ -143,62 +155,62 @@ else if($_SESSION['status']!="admin"){
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Pendaftar</strong>
-								<div class="btn-group" style="float:right;">
-									<a href="" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="fa fa-print"/> Cetak</a>
-									<div class="dropdown-menu">
-										<a href="cetak_aksi.php" target="_blank" class="dropdown-item"><span class="fa fa-print"/> Pendaftar</a>
-										<div class="dropdown-divider"></div>
-										<a href="cetak_aksi2.php" target="_blank" class="dropdown-item"><span class="fa fa-print"/> Pendaftar Ditolak</a>
-									</div>
-								</div>
+                                <div class="btn-group" style="float:right;">
+                                    <a href="" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="fa fa-print" /> Cetak</a>
+                                    <div class="dropdown-menu">
+                                        <a href="cetak_aksi.php" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Pendaftar</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="cetak_aksi2.php" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Pendaftar Ditolak</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
-							<br>
+                                <br>
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-											<th style="text-align:center;">No</th>
-											<th>Nama</th>
-											<th>NIM</th>
-											<th>Prodi</th>
-											<th>Kampus</th>
-											<th>Alamat</th>
-											<th>No Telp</th>
-											<th>Status</th>
+                                            <th style="text-align:center;">No</th>
+                                            <th>Nama</th>
+                                            <th>NIM</th>
+                                            <th>Prodi</th>
+                                            <th>Kampus</th>
+                                            <th>Alamat</th>
+                                            <th>No Telp</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-									<?php
-										$no = 1;
-										$data = mysqli_query($koneksi,"select * from t_peserta join t_user on t_peserta.peserta_nim=t_user.user_username where peserta_status='2' or peserta_status = '3' order by peserta_id asc");   
-										while($d = mysqli_fetch_array($data)){
-									?>
-                                        <tr>
-											<td style="text-align:center;"><?php echo $no++; ?></td>
-											<td><?php echo $d['peserta_nama']; ?></td>
-											<td><?php echo $d['peserta_nim']; ?></td>
-											<td><?php echo $d['peserta_prodi']; ?></td>
-											<td><?php echo $d['peserta_kampus']; ?></td>
-											<td><?php echo $d['peserta_alamat']; ?></td>
-											<td><?php echo $d['peserta_notelp']; ?></td>
-											<td style="text-align:center;">
-												<?php if ($d['peserta_status'] == '2') { 
-												echo '<span class="badge badge-warning">Menunggu persetujuan</span>'; 
-												} elseif ($d['peserta_status'] == '3') {
-													echo '<span class="badge badge-danger">Ditolak</span>';
-												} else {
-													echo '<span class="badge badge-success">Peserta</span>';
-												} ?>
-											</td>
-                                        </tr>
-										<?php }
-										?>
+                                        <?php
+                                        $no = 1;
+                                        $data = mysqli_query($koneksi, "select * from t_peserta join t_user on t_peserta.peserta_nim=t_user.user_username where peserta_status='2' or peserta_status = '3' order by peserta_id asc");
+                                        while ($d = mysqli_fetch_array($data)) {
+                                        ?>
+                                            <tr>
+                                                <td style="text-align:center;"><?php echo $no++; ?></td>
+                                                <td><?php echo $d['peserta_nama']; ?></td>
+                                                <td><?php echo $d['peserta_nim']; ?></td>
+                                                <td><?php echo $d['peserta_prodi']; ?></td>
+                                                <td><?php echo $d['peserta_kampus']; ?></td>
+                                                <td><?php echo $d['peserta_alamat']; ?></td>
+                                                <td><?php echo $d['peserta_notelp']; ?></td>
+                                                <td style="text-align:center;">
+                                                    <?php if ($d['peserta_status'] == '2') {
+                                                        echo '<span class="badge badge-warning">Menunggu persetujuan</span>';
+                                                    } elseif ($d['peserta_status'] == '3') {
+                                                        echo '<span class="badge badge-danger">Ditolak</span>';
+                                                    } else {
+                                                        echo '<span class="badge badge-success">Peserta</span>';
+                                                    } ?>
+                                                </td>
+                                            </tr>
+                                        <?php }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
-							<br>
+                            <br>
                         </div>
-						<br>
+                        <br>
                     </div>
                 </div>
             </div><!-- .animated -->
@@ -243,10 +255,11 @@ else if($_SESSION['status']!="admin"){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
 
 
 </body>
+
 </html>
