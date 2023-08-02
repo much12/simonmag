@@ -1,0 +1,16 @@
+{
+    "name": "temonbps/composer",
+    "description": "untuk kebutuhan belajar composer",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "rifky",
+            "email": "rifkyferdiannn@gmail.com"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.16"
+    }
+}
