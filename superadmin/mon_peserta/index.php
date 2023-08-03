@@ -295,7 +295,7 @@ if ($_SESSION['status'] == "") {
 																</button>
 															</div>
 															<div class="modal-body">
-																<form method="POST" action="edit.php">
+																<form method="POST" action="edit.php" enctype="multipart/form-data">
 																	<?php
 																	$nim = $d['peserta_nim'];
 																	$data_edit = mysqli_query($koneksi, "select * from t_peserta join t_kategori_p on t_peserta.peserta_status=t_kategori_p.peserta_status where peserta_nim='$nim'");
@@ -326,7 +326,7 @@ if ($_SESSION['status'] == "") {
 																		</div>
 																		<div class="form-group-sm">
 																			<label for="status">Status :</label>
-																			<select name="status" class="form-control" required="required">
+																			<select name="status" class="form-control" id="status" onchange="changeStatus()" required="required">
 																				<option value="<?php echo $row['peserta_status']; ?>" selected readonly><?php echo $row['kategori_peserta']; ?></option>
 																				<?php
 																				$idpiljwbn = mysqli_query($koneksi, "select * from t_kategori_p order by peserta_status asc LIMIT 2");
@@ -338,6 +338,19 @@ if ($_SESSION['status'] == "") {
 																				} ?>
 																			</select><br>
 																		</div>
+
+																		<?php if ($row['peserta_status'] == '0') : ?>
+																			<div class="form-group-sm" id="headersertifikat">
+																				<label for="">Sertifikat Peserta Magang :</label><br>
+																				<p>Kosongkan jika tidak ingin diubah</p>
+																				<input type="file" name="sertifikat" class="form-control" id="sertifikat"><br>
+																			</div>
+																			<div class="form-group-sm" id="headernilai">
+																				<label for="">Nilai Peserta Magang :</label>
+																				<p>Kosongkan jika tidak ingin diubah</p>
+																				<input type="file" name="nilai" class="form-control" id="nilai"><br>
+																			</div>
+																		<?php endif; ?>
 																		<div class="modal-footer">
 																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 																			<input type="submit" name="btnlogin" value="Simpan" class="btn btn-primary">
@@ -403,6 +416,20 @@ if ($_SESSION['status'] == "") {
 		$(document).ready(function() {
 			$('#bootstrap-data-table-export').DataTable();
 		});
+
+		function changeStatus() {
+			if ($('#status').val() != 0) {
+				$('#sertifikat').val(null);
+				$('#nilai').val(null);
+				$('#headersertifikat').hide();
+				$('#headernilai').hide();
+			} else {
+				$('#sertifikat').val(null);
+				$('#nilai').val(null);
+				$('#headersertifikat').show();
+				$('#headernilai').show();
+			}
+		}
 	</script>
 
 

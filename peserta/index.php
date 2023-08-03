@@ -234,6 +234,59 @@ if ($_SESSION['status'] == "") {
                             </div>
                         </div>
                     </div>
+
+                    <?php
+                    $no = 1;
+                    $username = $_SESSION['username'];
+                    $data2 = mysqli_query($koneksi, "select * from t_peserta where t_peserta.peserta_nim = '$username'");
+                    $cek2 = mysqli_fetch_object($data2);
+                    ?>
+
+                    <?php if ($cek2->sertifikat != null) : ?>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-4">
+                                            <i class="fa fa-file-o"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+
+                                                <div class="stat-text">Download</div>
+                                                <div class="stat-heading">Sertifikat</div>
+                                                <br>
+                                                <div class="stat-heading"><a href="../uploads/<?= $cek2->sertifikat ?? '' ?>" download="">download</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($cek2->sertifikat != null) : ?>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-4">
+                                            <i class="fa fa-file-o"></i>
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+
+                                                <div class="stat-text">Download</div>
+                                                <div class="stat-heading">Nilai</div>
+                                                <br>
+                                                <div class="stat-heading"><a href="../uploads/<?= $cek2->nilai ?? '' ?>" download="">download</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <!-- /Widgets -->
                 <div class="clearfix"></div><br><br><br><br><br><br><br><br><br><br><br><br>

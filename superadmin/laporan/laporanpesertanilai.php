@@ -140,7 +140,7 @@ if ($_SESSION['status'] == "") {
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
                                     <li><a href="#">Laporan</a></li>
-                                    <li class="active">Laporan Peserta Magang Ditolak</li>
+                                    <li class="active">Laporan Rata Rata Nilai Peserta Magang</li>
                                 </ol>
                             </div>
                         </div>
@@ -156,7 +156,7 @@ if ($_SESSION['status'] == "") {
                         <br>
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Laporan Peserta Magang Ditolak</strong>
+                                <strong class="card-title">Laporan Rata Rata Nilai Peserta Magang</strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -169,13 +169,15 @@ if ($_SESSION['status'] == "") {
                                             <th>Kampus</th>
                                             <th>Alamat</th>
                                             <th>Nomor Handphone</th>
+                                            <th>Rata Rata Nilai</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         include '../../koneksi.php';
+                                        $data = mysqli_query($koneksi, "select a.peserta_nama, a.peserta_nim, a.peserta_prodi, a.peserta_kampus, a.peserta_alamat, a.peserta_notelp, b.average_alphabet from t_peserta a join (SELECT peserta_id, CHAR(AVG(ASCII(nilai))) AS average_alphabet FROM t_laporan group by peserta_id) b on b.peserta_id = a.peserta_id where a.peserta_status = 1");
+
                                         $no = 1;
-                                        $data = mysqli_query($koneksi, "select peserta_nama, peserta_nim, peserta_prodi, peserta_kampus, peserta_alamat, peserta_notelp from t_peserta where peserta_status = 3 order by t_peserta.peserta_id asc");
                                         while ($d = mysqli_fetch_array($data)) {
                                         ?>
                                             <tr height="30px">
@@ -186,6 +188,7 @@ if ($_SESSION['status'] == "") {
                                                 <td><?php echo $d['peserta_kampus']; ?></td>
                                                 <td><?php echo $d['peserta_alamat']; ?></td>
                                                 <td><?php echo $d['peserta_notelp']; ?></td>
+                                                <td><?php echo $d['average_alphabet']; ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
