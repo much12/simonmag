@@ -1,7 +1,9 @@
 <?php
 session_start();
 include '../../koneksi.php';
-if ($_SESSION['status'] != "admin") {
+if ($_SESSION['status'] == "") {
+    header("location:../../index.php?pesan=belum_login");
+} else if ($_SESSION['status'] != "admin") {
     header("location:../../index.php?pesan=belum_admin");
 }
 ?>
@@ -53,7 +55,7 @@ if ($_SESSION['status'] != "admin") {
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-sitemap"></i>Master Data</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-users"></i><a href="../pendaftar/">&nbsp;Pendaftar</a></li>
+                            <li><i class="fa fa-users"></i><a href="../pendaftar">&nbsp;Pendaftar</a></li>
                             <li><i class="fa fa-users"></i><a href="../peserta/">&nbsp;Peserta</a></li>
                             <li><i class="fa fa-user"></i><a href="../bidang/">&nbsp;Bidang</a></li>
                             <li><i class="fa fa-user"></i><a href="../kategori_p/">&nbsp;Kategori Peserta</a></li>
@@ -66,14 +68,14 @@ if ($_SESSION['status'] != "admin") {
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-users"></i><a href="../mon_pendaftar/">&nbsp;Pendaftar</a></li>
                             <li><i class="fa fa-users"></i><a href="../mon_peserta/">&nbsp;Peserta</a></li>
-                            <li><i class="fa fa-tag"></i><a href="../mon_laporan/">&nbsp;Laporan</a></li>
+                            <li><i class="fa fa-tag"></i><a href="../mon_laporan">&nbsp;Laporan</a></li>
                         </ul>
                     </li>
                     <li class="menu-title">Rekap</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Rekap</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/">&nbsp;Laporan Disetujui</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="#">&nbsp;Laporan Disetujui</a></li>
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/index2.php">&nbsp;Laporan Ditolak</a></li>
                         </ul>
                     </li>
@@ -84,6 +86,7 @@ if ($_SESSION['status'] != "admin") {
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditerima.php">&nbsp;Laporan Pendaftara Peserta Magang Diterima</a></li>
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditolak.php">&nbsp;Laporan Peserta Magang Ditolak</a></li>
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaperperiode.php">&nbsp;Laporan Peserta Magang Perperiode</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertanilai.php">&nbsp;Laporan Rata Rata Nilai Peserta Magang</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -127,7 +130,7 @@ if ($_SESSION['status'] != "admin") {
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Monitoring</h1>
+                                <h1>Laporan</h1>
                             </div>
                         </div>
                     </div>
@@ -136,8 +139,8 @@ if ($_SESSION['status'] != "admin") {
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
                                     <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Monitoring</a></li>
-                                    <li class="active">Peserta</li>
+                                    <li><a href="#">Laporan</a></li>
+                                    <li class="active">Laporan Rata Rata Nilai Peserta Magang</li>
                                 </ol>
                             </div>
                         </div>
@@ -153,127 +156,41 @@ if ($_SESSION['status'] != "admin") {
                         <br>
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Laporan Kegiatan</strong>
-                                <?php
-                                $nim = $_GET['nim'];
-                                ?>
-                                <div class="btn-group" style="float:right;">
-                                    <a href="" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="fa fa-print" /> Cetak</a>
-                                    <div class="dropdown-menu">
-                                        <a href="cetak_aksi.php?nim=<?php echo $nim; ?>" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Laporan Disetujui</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="cetak_aksi2.php?nim=<?php echo $nim; ?>" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Laporan Ditolak</a>
-                                    </div>
-                                </div>
+                                <strong class="card-title">Laporan Rata Rata Nilai Peserta Magang</strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th style="text-align:center;">No</th>
-                                            <th>Tanggal</th>
                                             <th>Nama</th>
-                                            <th>Kegiatan</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
+                                            <th>NIM</th>
+                                            <th>Prodi</th>
+                                            <th>Kampus</th>
+                                            <th>Alamat</th>
+                                            <th>Nomor Handphone</th>
+                                            <th>Rata Rata Nilai</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        include '../../koneksi.php';
+                                        $data = mysqli_query($koneksi, "select a.peserta_nama, a.peserta_nim, a.peserta_prodi, a.peserta_kampus, a.peserta_alamat, a.peserta_notelp, b.average_alphabet from t_peserta a join (SELECT peserta_id, CHAR(AVG(ASCII(nilai))) AS average_alphabet FROM t_laporan group by peserta_id) b on b.peserta_id = a.peserta_id where a.peserta_status = 1");
+
                                         $no = 1;
-                                        $data = mysqli_query($koneksi, "select * from t_laporan join t_peserta on t_laporan.peserta_id = t_peserta.peserta_id where t_peserta.peserta_nim = '$nim' order by t_laporan.laporan_id asc");
                                         while ($d = mysqli_fetch_array($data)) {
                                         ?>
-                                            <tr>
+                                            <tr height="30px">
                                                 <td style="text-align:center;"><?php echo $no++; ?></td>
-                                                <td><?php echo $d['laporan_tanggal']; ?></td>
                                                 <td><?php echo $d['peserta_nama']; ?></td>
-                                                <td><?php echo $d['laporan_kegiatan']; ?></td>
-                                                <td style="text-align:center;">
-                                                    <?php if ($d['laporan_status'] == '0') {
-                                                        echo '<span class="badge badge-warning">Menunggu persetujuan</span>';
-                                                    } elseif ($d['laporan_status'] == '1') {
-                                                        echo '<span class="badge badge-success">Disetujui</span>';
-                                                    } elseif ($d['laporan_status'] == '2') {
-                                                        echo '<span class="badge badge-danger">Ditolak</span>';
-                                                    } ?>
-                                                </td>
-                                                <td style="text-align:center;">
-                                                    <?php
-                                                    if ($d['laporan_status'] == "0") { ?>
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">Aksi</button>
-                                                            <div class="dropdown-menu">
-                                                                <a href="" class="dropdown-item" data-toggle="modal" data-target="#edit<?php echo $d['laporan_id']; ?>"><span class="fa fa-edit" /> Edit Data</a>
-                                                                <div class="dropdown-divider"></div>
-                                                                <a href="" class="dropdown-item" data-toggle="modal" data-target="#delete<?php echo $d['laporan_id']; ?>"><span class="fa fa-trash" /> Delete Data</a>
-                                                            </div>
-                                                        </div>
-                                                    <?php } else {
-                                                        echo "No Action Needed";
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <div class="modal fade" id="delete<?php echo $d['laporan_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalSayaLabel">Sistem Monitoring Magang</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                Data yang anda pilih akan dihapus.<br>Apakah anda yakin ingin hapus data?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <a href="delete2.php?laporan_id=<?php echo $d['laporan_id']; ?>" class="btn btn-primary">Oke</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal fade" id="edit<?php echo $d['laporan_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalSayaLabel">Edit Data</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form method="POST" action="edit2.php?laporan_id=<?php echo $d['laporan_id']; ?>">
-                                                                    <?php
-                                                                    $id = $d['laporan_id'];
-                                                                    $data_edit = mysqli_query($koneksi, "select * from t_laporan join t_peserta on t_laporan.peserta_id = t_peserta.peserta_id where t_laporan.laporan_id = '$id' order by t_laporan.laporan_id asc");
-                                                                    while ($row = mysqli_fetch_array($data_edit)) { ?>
-                                                                        <div class="form-group-sm">
-                                                                            <label for="display">Tanggal :</label>
-                                                                            <input type="date" name="tanggal" class="form-control" value="<?php echo $row['laporan_tanggal']; ?>" required="required"><br>
-                                                                        </div>
-                                                                        <div class="form-group-sm">
-                                                                            <label for="display">Peserta :</label>
-                                                                            <input type="text" name="peserta" class="form-control" value="<?php echo $row['peserta_nama']; ?>" required="required" readonly><br>
-                                                                        </div>
-                                                                        <div class="form-group-sm">
-                                                                            <label for="display">Kegiatan :</label>
-                                                                            <input type="text" name="kegiatan" class="form-control" value="<?php echo $row['laporan_kegiatan']; ?>" required="required"><br>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                            <input type="submit" name="btnlogin" value="Simpan" class="btn btn-primary">
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <td><?php echo $d['peserta_nim']; ?></td>
+                                                <td><?php echo $d['peserta_prodi']; ?></td>
+                                                <td><?php echo $d['peserta_kampus']; ?></td>
+                                                <td><?php echo $d['peserta_alamat']; ?></td>
+                                                <td><?php echo $d['peserta_notelp']; ?></td>
+                                                <td><?php echo $d['average_alphabet']; ?></td>
                                             </tr>
-                                        <?php }
-                                        ?>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
