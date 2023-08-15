@@ -101,7 +101,10 @@ if ($_SESSION['status'] == "") {
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.php">Sistem Monitoring Magang</a>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="../img/pemprov.png" alt="" width="50">
+                        Monitoring Magang
+                    </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -338,6 +341,22 @@ if ($_SESSION['status'] == "") {
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong class="card-title">Laporan Kegiatan Mahasiswa</strong>
+
+                                <a href="export_grafik.php" class="btn btn-danger btn-sm" target="_blank">
+                                    <i class="fa fa-file"></i>
+                                    Export
+                                </a>
+                            </div>
+
+                            <div class="card-body">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /Widgets -->
                 <div class="clearfix"></div><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -384,5 +403,41 @@ if ($_SESSION['status'] == "") {
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="../assets/js/init/fullcalendar-init.js"></script>
+
+<?php
+$nama = array();
+$total = array();
+$peserta = mysqli_query($koneksi, "select peserta_id, peserta_nama from t_peserta where peserta_status = 1");
+while ($row = mysqli_fetch_array($peserta)) {
+    // select * from t_laporan where laporan_status = 1 and peserta_id = 1
+    $laporan = mysqli_query($koneksi, "select * from t_laporan where laporan_status = 1 and peserta_id = " . $row['peserta_id']);
+    $cek = mysqli_num_rows($laporan);
+
+    $nama[] = $row['peserta_nama'];
+    $total[] = $cek;
+}
+?>
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?= json_encode($nama) ?>,
+            datasets: [{
+                label: 'Laporan',
+                data: <?= json_encode($total) ?>,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 </html>

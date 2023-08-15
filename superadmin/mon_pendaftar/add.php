@@ -71,7 +71,7 @@ if ($_SESSION['status'] != "admin") {
 		} else {
 			$add1 = mysqli_query($koneksi, "insert into t_user values('', '$nim', '$nim', '$nama', '$notelp', '1')");
 			if ($add1) {
-				$add2 = mysqli_query($koneksi, "insert into t_peserta values('', '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '2', '', '')");
+				$add2 = mysqli_query($koneksi, "insert into t_peserta values('', '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '2', '', '', '', '')");
 				if ($add2) {
 					echo '<div class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

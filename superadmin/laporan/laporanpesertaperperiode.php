@@ -100,7 +100,10 @@ if ($_SESSION['status'] == "") {
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="../index.php">Sistem Monitoring Magang</a>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="../../img/pemprov.png" alt="" width="50">
+                        Monitoring Magang
+                    </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -173,6 +176,16 @@ if ($_SESSION['status'] == "") {
                                         <div class="modal-footer col-md-4">
                                             <a href="../laporan/laporanpesertaperperiode.php" class="btn btn-danger">Reset</a>
                                             <input type="submit" name="btnlogin" value="Filter" class="btn btn-primary">
+                                            <button type="button" class="btn btn-danger" onclick="exportData()">Export</button>
+
+                                            <script>
+                                                function exportData() {
+                                                    let tanggalawal = document.getElementsByName('tanggalawal')[0].value;
+                                                    let tanggalakhir = document.getElementsByName('tanggalakhir')[0].value;
+
+                                                    window.location.href = `export_laporanpesertaperperiode.php?tanggalawal=${tanggalawal}&tanggalakhir=${tanggalakhir}`;
+                                                }
+                                            </script>
                                         </div>
                                     </div>
 

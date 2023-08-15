@@ -85,7 +85,7 @@ session_start();
 				if (move_uploaded_file($surat_pengantar["tmp_name"], $target_file)) {
 					$add1 = mysqli_query($koneksi, "insert into t_user values('', '$nim', '$nim', '$nama', '$notelp', '1', '$bidang')");
 					if ($add1) {
-						$add2 = mysqli_query($koneksi, "insert into t_peserta values('', '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '2', '$filename', '')");
+						$add2 = mysqli_query($koneksi, "insert into t_peserta values('', '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '2', '$filename', '', '', '', '')");
 						if ($add2) {
 							echo '<div class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

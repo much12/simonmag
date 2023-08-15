@@ -1,28 +1,29 @@
 <?php
 session_start();
 include '../../koneksi.php';
-if($_SESSION['status']==""){
-	header("location:../../index.php?pesan=belum_login");
+if ($_SESSION['status'] == "") {
+    header("location:../../index.php?pesan=belum_login");
+} else if ($_SESSION['status'] != "peserta") {
+    header("location:../../index.php?pesan=belum_login");
 }
-else if($_SESSION['status']!="peserta"){
-	header("location:../../index.php?pesan=belum_login");
-} 
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Sistem Monitoring Magang</title>
+    <title>Sistem Monitoring Magang</title>
     <meta name="description" content="Sistem Monitoring Magang">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="../../img/logo.png">
     <link rel="shortcut icon" href="../../img/logo.png">
-	<link rel="icon" type="image/png" href="../../img/logo.png">
+    <link rel="icon" type="image/png" href="../../img/logo.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
@@ -39,6 +40,7 @@ else if($_SESSION['status']!="peserta"){
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
+
 <body>
     <!-- Left Panel -->
 
@@ -49,19 +51,20 @@ else if($_SESSION['status']!="peserta"){
                     <li class="active">
                         <a href="../"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-					<li class="menu-title">Monitoring</li><!-- /.menu-title -->
+                    <li class="menu-title">Monitoring</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href= "#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Monitoring</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Monitoring</a>
                         <ul class="sub-menu children dropdown-menu">
-							<li><i class="fa fa-tag"></i><a href="../mon_laporan">&nbsp;Laporan</a></li>
+                            <li><i class="fa fa-tag"></i><a href="../mon_laporan">&nbsp;Laporan</a></li>
                         </ul>
                     </li>
-					<li class="menu-title">Rekap</li><!-- /.menu-title -->
+                    <li class="menu-title">Rekap</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href= "#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Rekap</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Rekap</a>
                         <ul class="sub-menu children dropdown-menu">
-                           <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/">&nbsp;Laporan Disetujui</a></li>
-							<li><i class="menu-icon fa fa-folder-open-o"></i><a href="#">&nbsp;Laporan Ditolak</a></li></ul>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../rekap/">&nbsp;Laporan Disetujui</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="#">&nbsp;Laporan Ditolak</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -74,7 +77,10 @@ else if($_SESSION['status']!="peserta"){
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="../index.php">Sistem Monitoring Magang</a>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="../../img/pemprov.png" alt="" width="50">
+                        Monitoring Magang
+                    </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -97,7 +103,7 @@ else if($_SESSION['status']!="peserta"){
             </div>
         </header><!-- /header -->
         <!-- Header-->
-		<br>
+        <br>
         <div class="breadcrumbs">
             <div class="breadcrumbs-inner">
                 <div class="row m-0">
@@ -122,7 +128,7 @@ else if($_SESSION['status']!="peserta"){
                 </div>
             </div>
         </div>
-		
+
         <div class="content">
             <div class="animated fadeIn">
                 <div class="row">
@@ -130,53 +136,53 @@ else if($_SESSION['status']!="peserta"){
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Laporan Ditolak</strong>
-								<a href="cetak_aksi2.php" target="_blank" class="btn btn-info" style="float:right;"><span class="fa fa-print"/> Cetak</a>
+                                <a href="cetak_aksi2.php" target="_blank" class="btn btn-info" style="float:right;"><span class="fa fa-print" /> Cetak</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-											<th style="text-align:center;">No</th>
-											<th>Tanggal</th>
-											<th>Nama</th>
-											<th>NIM</th>
-											<th>Kampus</th>
-											<th>Kegiatan</th>
-											<th>Status</th>
+                                            <th style="text-align:center;">No</th>
+                                            <th>Tanggal</th>
+                                            <th>Nama</th>
+                                            <th>NIM</th>
+                                            <th>Kampus</th>
+                                            <th>Kegiatan</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-									<?php 
-										include '../../koneksi.php';
-										$no = 1;
-										$username = $_SESSION['username'];
-										$data = mysqli_query($koneksi,"select * from t_laporan join t_peserta on t_laporan.peserta_id = t_peserta.peserta_id where t_laporan.laporan_status = '2' and t_peserta.peserta_nim='$username' order by t_laporan.laporan_id asc");   
-										while($d = mysqli_fetch_array($data)){
-										?>
-											<tr height="30px">
-												<td style="text-align:center;"><?php echo $no++; ?></td>
-												<td><?php echo $d['laporan_tanggal']; ?></td>
-												<td><?php echo $d['peserta_nama']; ?></td>
-												<td><?php echo $d['peserta_nim']; ?></td>
-												<td><?php echo $d['peserta_kampus']; ?></td>
-												<td><?php echo $d['laporan_kegiatan']; ?></td>
-												<td style="text-align:center;">
-												<?php if ($d['laporan_status'] == '0') {
-													echo '<span class="badge badge-warning">Menunggu persetujuan</span>';
-												} elseif ($d['laporan_status'] == '1') {
-													echo '<span class="badge badge-success">Disetujui</span>';
-												} elseif ($d['laporan_status'] == '2') {
-													echo '<span class="badge badge-danger">Ditolak</span>';
-												} ?>
-												</td>
-											</tr>
-									<?php } ?>
+                                        <?php
+                                        include '../../koneksi.php';
+                                        $no = 1;
+                                        $username = $_SESSION['username'];
+                                        $data = mysqli_query($koneksi, "select * from t_laporan join t_peserta on t_laporan.peserta_id = t_peserta.peserta_id where t_laporan.laporan_status = '2' and t_peserta.peserta_nim='$username' order by t_laporan.laporan_id asc");
+                                        while ($d = mysqli_fetch_array($data)) {
+                                        ?>
+                                            <tr height="30px">
+                                                <td style="text-align:center;"><?php echo $no++; ?></td>
+                                                <td><?php echo $d['laporan_tanggal']; ?></td>
+                                                <td><?php echo $d['peserta_nama']; ?></td>
+                                                <td><?php echo $d['peserta_nim']; ?></td>
+                                                <td><?php echo $d['peserta_kampus']; ?></td>
+                                                <td><?php echo $d['laporan_kegiatan']; ?></td>
+                                                <td style="text-align:center;">
+                                                    <?php if ($d['laporan_status'] == '0') {
+                                                        echo '<span class="badge badge-warning">Menunggu persetujuan</span>';
+                                                    } elseif ($d['laporan_status'] == '1') {
+                                                        echo '<span class="badge badge-success">Disetujui</span>';
+                                                    } elseif ($d['laporan_status'] == '2') {
+                                                        echo '<span class="badge badge-danger">Ditolak</span>';
+                                                    } ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-							<br>
+                            <br>
                         </div>
-						<br>
+                        <br>
                     </div>
                 </div>
             </div><!-- .animated -->
@@ -220,8 +226,9 @@ else if($_SESSION['status']!="peserta"){
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-      } );
-  </script>
+            $('#bootstrap-data-table-export').DataTable();
+        });
+    </script>
 </body>
+
 </html>

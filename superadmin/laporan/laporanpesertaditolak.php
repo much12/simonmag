@@ -100,7 +100,10 @@ if ($_SESSION['status'] == "") {
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="../index.php">Sistem Monitoring Magang</a>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="../../img/pemprov.png" alt="" width="50">
+                        Monitoring Magang
+                    </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -155,8 +158,13 @@ if ($_SESSION['status'] == "") {
                     <div class="col-md-12">
                         <br>
                         <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Laporan Peserta Magang Ditolak</strong>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong class="card-title mb-0">Laporan Peserta Magang Ditolak</strong>
+
+                                <a href="export_laporanpesertaditolak.php" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-file"></i>
+                                    Export
+                                </a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">

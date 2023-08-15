@@ -99,7 +99,10 @@ if ($_SESSION['status'] == "") {
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="../index.php">Sistem Monitoring Magang</a>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="../../img/pemprov.png" alt="" width="50">
+                        Monitoring Magang
+                    </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
