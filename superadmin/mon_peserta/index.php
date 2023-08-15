@@ -329,7 +329,7 @@ if ($_SESSION['status'] == "") {
 																		</div>
 																		<div class="form-group-sm">
 																			<label for="status">Status :</label>
-																			<select name="status" class="form-control" id="status" onchange="changeStatus()" required="required">
+																			<select name="status" class="form-control" id="status" onchange="changeStatus(this)" required="required">
 																				<option value="<?php echo $row['peserta_status']; ?>" selected readonly><?php echo $row['kategori_peserta']; ?></option>
 																				<?php
 																				$idpiljwbn = mysqli_query($koneksi, "select * from t_kategori_p order by peserta_status asc LIMIT 2");
@@ -342,18 +342,16 @@ if ($_SESSION['status'] == "") {
 																			</select><br>
 																		</div>
 
-																		<?php if ($row['peserta_status'] == '0') : ?>
-																			<div class="form-group-sm" id="headersertifikat">
-																				<label for="">Sertifikat Peserta Magang :</label><br>
-																				<p>Kosongkan jika tidak ingin diubah</p>
-																				<input type="file" name="sertifikat" class="form-control" id="sertifikat"><br>
-																			</div>
-																			<div class="form-group-sm" id="headernilai">
-																				<label for="">Nilai Peserta Magang :</label>
-																				<p>Kosongkan jika tidak ingin diubah</p>
-																				<input type="file" name="nilai" class="form-control" id="nilai"><br>
-																			</div>
-																		<?php endif; ?>
+																		<div class="form-group-sm" id="headersertifikat" style="<?= $row['peserta_status'] != 0 ? 'display:none;' : null ?>">
+																			<label for="">Sertifikat Peserta Magang :</label><br>
+																			<p>Kosongkan jika tidak ingin diubah</p>
+																			<input type="file" name="sertifikat" class="form-control" id="sertifikat"><br>
+																		</div>
+																		<div class="form-group-sm" id="headernilai" style="<?= $row['peserta_status'] != 0 ? 'display:none;' : null ?>">
+																			<label for="">Nilai Peserta Magang :</label>
+																			<p>Kosongkan jika tidak ingin diubah</p>
+																			<input type="file" name="nilai" class="form-control" id="nilai"><br>
+																		</div>
 																		<div class="modal-footer">
 																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 																			<input type="submit" name="btnlogin" value="Simpan" class="btn btn-primary">
@@ -420,17 +418,17 @@ if ($_SESSION['status'] == "") {
 			$('#bootstrap-data-table-export').DataTable();
 		});
 
-		function changeStatus() {
-			if ($('#status').val() != 0) {
-				$('#sertifikat').val(null);
-				$('#nilai').val(null);
-				$('#headersertifikat').hide();
-				$('#headernilai').hide();
+		function changeStatus(these) {
+			if ($(these).val() == 0) {
+				$(these).parent().parent().find('#sertifikat').val(null);
+				$(these).parent().parent().find('#nilai').val(null);
+				$(these).parent().parent().find('#headersertifikat').show();
+				$(these).parent().parent().find('#headernilai').show();
 			} else {
-				$('#sertifikat').val(null);
-				$('#nilai').val(null);
-				$('#headersertifikat').show();
-				$('#headernilai').show();
+				$(these).parent().parent().find('#sertifikat').val(null);
+				$(these).parent().parent().find('#nilai').val(null);
+				$(these).parent().parent().find('#headersertifikat').hide();
+				$(these).parent().parent().find('#headernilai').hide();
 			}
 		}
 	</script>
