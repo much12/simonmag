@@ -190,8 +190,64 @@ if ($_SESSION['status'] == "") {
                                                 <td><?php echo $d['peserta_notelp']; ?></td>
                                                 <td style="text-align:center;">
                                                     <?php if ($d['peserta_status'] == '2') { ?>
-                                                        <a href="setujui.php?peserta_nim=<?php echo $d['peserta_nim']; ?>" class="btn btn-sm btn-success">Setujui</a>
-                                                        <a href="tolak.php?peserta_nim=<?php echo $d['peserta_nim']; ?>" class="btn btn-sm btn-danger">Tolak</a>
+                                                        <!-- <a href="setujui.php?peserta_nim=<?php echo $d['peserta_nim']; ?>" class="btn btn-sm btn-success">Setujui</a>
+                                                        <a href="tolak.php?peserta_nim=<?php echo $d['peserta_nim']; ?>" class="btn btn-sm btn-danger">Tolak</a> -->
+                                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#setujui<?= $d['peserta_nim'] ?>">Setujui</button>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#tolak<?= $d['peserta_nim'] ?>">Tolak</button>
+
+                                                        <div class="modal fade" id="setujui<?php echo $d['peserta_nim']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header d-flex justify-content-between">
+                                                                        <h5 class="modal-title" id="modalSayaLabel">Sistem Monitoring Magang</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <form action="setujui.php?peserta_nim=<?= $d['peserta_nim'] ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                                                        <div class="modal-body text-left">
+                                                                            <div class="form-group">
+                                                                                <label for="">Surat Balasan</label>
+                                                                                <input type="file" name="suratbalasan" class="form-control" accept=".pdf, .doc" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="tolak<?php echo $d['peserta_nim']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header d-flex justify-content-between">
+                                                                        <h5 class="modal-title" id="modalSayaLabel">Sistem Monitoring Magang</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <form action="tolak.php?peserta_nim=<?= $d['peserta_nim'] ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
+                                                                        <div class="modal-body text-left">
+                                                                            <div class="form-group">
+                                                                                <label for="">Surat Balasan</label>
+                                                                                <input type="file" name="suratbalasan" class="form-control" accept=".pdf, .doc" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     <?php } elseif ($d['peserta_status'] == '3') {
                                                         echo '<span class="badge badge-danger">Ditolak</span>';
                                                     } else {
