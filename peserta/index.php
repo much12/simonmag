@@ -289,7 +289,7 @@ if ($_SESSION['status'] == "") {
                                                 <br>
 
                                                 <div class="stat-heading">
-                                                    <a href="cetak/cetak_serti.php?nim=<?= $cek2->peserta_nim ?>" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Cetak Sertifikat</a>
+                                                    <a href="cetak/cetak_serti.php?nim=<?= $cek2->peserta_nim ?>" target="_blank">Cetak Sertifikat</a>
                                                     <!-- <a href="../uploads/<?= $cek2->sertifikat ?? '' ?>" download="">download</a> -->
                                                 </div>
                                             </div>
@@ -314,7 +314,7 @@ if ($_SESSION['status'] == "") {
                                                 <div class="stat-text">Download</div>
                                                 <div class="stat-heading">Nilai</div>
                                                 <br>
-                                                <div class="stat-heading"><a href="../uploads/<?= $cek2->nilai ?? '' ?>" download="">download</a></div>
+                                                <div class="stat-heading"><a href="../uploads/<?= $cek2->nilai ?? '' ?>" download="">Download</a></div>
                                             </div>
                                         </div>
                                     </div>

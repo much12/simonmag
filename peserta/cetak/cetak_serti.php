@@ -1,7 +1,9 @@
 <?php
 session_start();
-
-include "../../../koneksi.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+include "../../koneksi.php";
 $id = $_GET['nim'];
 $res = mysqli_query($koneksi, "select * from t_peserta where peserta_nim='$id'");
 if (mysqli_num_rows($res) > 0) {
