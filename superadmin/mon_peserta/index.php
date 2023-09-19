@@ -348,9 +348,11 @@ if ($_SESSION['status'] == "") {
 																			<p>Kosongkan jika tidak ingin diubah</p>
 																			<input type="file" name="sertifikat" class="form-control" id="sertifikat"><br>
 																		</div>
-																		<div class="form-group-sm" id="headernilai" style="<?= $row['peserta_status'] != 0 ? 'display:none;' : null ?>">
+																		<div class="form-group-sm" id="headernilai" style="<?= $row['peserta_status'] != 0 ? 'display:none;' : null ?>" <?= $row['peserta_status'] == 0 && isset($row['peserta_status']) ? 'required' : null ?>>
 																			<label for="">Nilai Peserta Magang :</label>
-																			<p>Kosongkan jika tidak ingin diubah</p>
+																			<?php if (!isset($row['nilai'])) : ?>
+																				<p>Kosongkan jika tidak ingin diubah</p>
+																			<?php endif; ?>
 																			<input type="file" name="nilai" class="form-control" id="nilai"><br>
 																		</div>
 																		<div class="modal-footer">

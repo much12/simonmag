@@ -273,7 +273,7 @@ if ($_SESSION['status'] == "") {
                     $cek2 = mysqli_fetch_object($data2);
                     ?>
 
-                    <?php if ($cek2->sertifikat != null) : ?>
+                    <?php if ($cek2->peserta_status == 0) : ?>
                         <div class="col-lg-4 col-md-6">
                             <div class="card">
                                 <div class="card-body">
@@ -284,10 +284,14 @@ if ($_SESSION['status'] == "") {
                                         <div class="stat-content">
                                             <div class="text-left dib">
 
-                                                <div class="stat-text">Download</div>
+                                                <div class="stat-text">Cetak</div>
                                                 <div class="stat-heading">Sertifikat</div>
                                                 <br>
-                                                <div class="stat-heading"><a href="../uploads/<?= $cek2->sertifikat ?? '' ?>" download="">download</a></div>
+
+                                                <div class="stat-heading">
+                                                    <a href="cetak/cetak_serti.php?nim=<?= $cek2->nim ?>" target="_blank" class="dropdown-item"><span class="fa fa-print" /> Cetak Sertifikat</a>
+                                                    <!-- <a href="../uploads/<?= $cek2->sertifikat ?? '' ?>" download="">download</a> -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
