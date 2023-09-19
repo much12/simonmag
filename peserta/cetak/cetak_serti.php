@@ -1,11 +1,5 @@
 <?php
-error_reporting(E_ALL);
-error_reporting(-1);
-ini_set('error_reporting', E_ALL);
 session_start();
-if ($_SESSION['status'] != "admin") {
-	header("location:../../index.php?pesan=belum_admin");
-}
 
 include "../../../koneksi.php";
 $id = $_GET['nim'];
@@ -41,7 +35,7 @@ imagettftext($image, $size, 0, $x, 407, $black, $font, $name);
 $date = "Banjarbaru," . date('d M y');
 imagettftext($image, $size1, 0, 416, 526, $black, $font1, $date);
 //tampilkan di browser
-// header("Content-type:  image/jpeg");
+header("Content-type:  image/jpeg");
 imagejpeg($image);
 imagedestroy($image);
 ?>
