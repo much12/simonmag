@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+error_reporting(-1);
+ini_set('error_reporting', E_ALL);
 session_start();
 if ($_SESSION['status'] != "admin") {
     header("location:../../index.php?pesan=belum_admin");
@@ -55,7 +58,7 @@ if ($_SESSION['status'] != "admin") {
 	<div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
         echo '<meta http-equiv="refresh" content="1;url=index.php">';
     } else {
-        $add1 = mysqli_query($koneksi, "insert into t_laporan values('', '$tanggal', '$peserta', '$kegiatan', '$status', '', '')");
+        $add1 = mysqli_query($koneksi, "insert into t_laporan values(NULL, '$tanggal', '$peserta', '$kegiatan', '$status', '', '')");
         if ($add1) {
             echo '<div class="alert alert-success" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

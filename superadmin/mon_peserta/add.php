@@ -4,7 +4,6 @@ if ($_SESSION['status'] != "admin") {
 	header("location:../../index.php?pesan=belum_admin");
 }
 ?>
-?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -71,9 +70,9 @@ if ($_SESSION['status'] != "admin") {
 		<div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
 			echo '<meta http-equiv="refresh" content="1;url=index.php">';
 		} else {
-			$add1 = mysqli_query($koneksi, "insert into t_user values('', '$nim', '$nim', '$nama', '$notelp', '1', '$bidang')");
+			$add1 = mysqli_query($koneksi, "insert into t_user values(NULL, '$nim', '$nim', '$nama', '$notelp', '1', '$bidang')");
 			if ($add1) {
-				$add2 = mysqli_query($koneksi, "insert into t_peserta values('', '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '1', '', '', '', '')");
+				$add2 = mysqli_query($koneksi, "insert into t_peserta values(NULL, '$nama', '$nim', '$prodi', '$kampus', '$alamat', '$notelp', '1', '', '', '', '')");
 				if ($add2) {
 					echo '<div class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
