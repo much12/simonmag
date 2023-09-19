@@ -86,6 +86,7 @@ if ($_SESSION['status'] == "") {
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditerima.php">&nbsp;Laporan Pendaftara Peserta Magang Diterima</a></li>
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaditolak.php">&nbsp;Laporan Peserta Magang Ditolak</a></li>
                             <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertaperperiode.php">&nbsp;Laporan Peserta Magang Perperiode</a></li>
+                            <li><i class="menu-icon fa fa-folder-open-o"></i><a href="../laporan/laporanpesertanilai.php">&nbsp;Laporan Rata Rata Nilai Peserta Magang</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -241,6 +242,7 @@ if ($_SESSION['status'] == "") {
                                                         <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">Aksi</button>
                                                         <div class="dropdown-menu">
                                                             <a href="" class="dropdown-item" data-toggle="modal" data-target="#edit<?php echo $d['laporan_id']; ?>"><span class="fa fa-edit" /> Edit</a>
+                                                            <a href="../../uploads/<?= $d['dokumen'] ?>" class="dropdown-item" target="_blank"><span class="fa fa-print" /> Cetak</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a href="" class="dropdown-item" data-toggle="modal" data-target="#delete<?php echo $d['laporan_id']; ?>"><span class="fa fa-trash" /> Delete</a>
                                                         </div>

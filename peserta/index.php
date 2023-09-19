@@ -57,6 +57,8 @@ if ($_SESSION['status'] == "") {
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Monitoring</a>
                         <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-table"></i><a href="absensi/">Absensi</a></li>
+                            <li><i class="fa fa-table"></i><a href="./kegiatan/">Kegiatan</a></li>
                             <li><i class="fa fa-table"></i><a href="mon_laporan/">Laporan</a></li>
                         </ul>
                     </li>
@@ -231,6 +233,32 @@ if ($_SESSION['status'] == "") {
                                             <div class="stat-heading">Surat Pengantar</div>
                                             <br>
                                             <div class="stat-heading"><a href="../uploads/<?= $cek2->surat_pengantar ?? '' ?>" target="_blank">More Details</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-4">
+                                        <i class="fa fa-file-o"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <?php
+                                            $no = 1;
+                                            $username = $_SESSION['username'];
+                                            $data2 = mysqli_query($koneksi, "select * from t_peserta where t_peserta.peserta_nim = '$username'");
+                                            $cek2 = mysqli_fetch_object($data2);
+                                            ?>
+                                            <div class="stat-text">Dokumen</div>
+                                            <div class="stat-heading">Surat Balasan</div>
+                                            <br>
+                                            <div class="stat-heading"><a href="../uploads/<?= $cek2->surat_balasan ?? '' ?>" target="_blank">More Details</a></div>
                                         </div>
                                     </div>
                                 </div>

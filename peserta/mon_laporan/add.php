@@ -3,6 +3,9 @@ session_start();
 if ($_SESSION['status'] == "") {
     header("location:../../index.php?pesan=belum_login");
 }
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -46,6 +49,7 @@ if ($_SESSION['status'] == "") {
     $peserta = $_POST['peserta'];
     $kegiatan = $_POST['kegiatan'];
     $status = '0';
+    $dokumen = $_FILES['dokumen'];
 
     if (empty($tanggal) or empty($peserta) or empty($kegiatan)) {
         echo '<div class="alert alert-danger" role="alert">
@@ -55,20 +59,50 @@ if ($_SESSION['status'] == "") {
 	<div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
         echo '<meta http-equiv="refresh" content="1;url=index.php">';
     } else {
-        $add1 = mysqli_query($koneksi, "insert into t_laporan values('', '$tanggal', '$peserta', '$kegiatan', '$status', '')");
-        if ($add1) {
-            echo '<div class="alert alert-success" role="alert">
+        // upload
+        $ekstensi_diperbolehkan    = array('pdf', 'doc', 'docx');
+        $nama_dokumen = $_FILES['dokumen']['name'];
+        $x = explode('.', $nama_dokumen);
+        $ekstensi = strtolower(end($x));
+        $ukuran    = $_FILES['dokumen']['size'];
+        $file_tmp = $_FILES['dokumen']['tmp_name'];
+
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            if ($ukuran < 1044070) {
+                move_uploaded_file($file_tmp, '../../uploads/' . $nama_dokumen);
+
+                $add1 = mysqli_query($koneksi, "insert into t_laporan values(null, '$tanggal', '$peserta', '$kegiatan', '$status', '', '$nama_dokumen')");
+                if ($add1) {
+                    echo '<div class="alert alert-success" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<strong>Berhasil!</strong> Data berhasil ditambahkan.</div><br>
 		<div class="row justify-content-center">
 		<div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
-            echo '<meta http-equiv="refresh" content="1;url=index.php">';
-        } else {
-            echo '<div class="alert alert-danger" role="alert">
+                    echo '<meta http-equiv="refresh" content="1;url=index.php">';
+                } else {
+                    echo '<div class="alert alert-danger" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<strong>Gagal!</strong> Data tidak berhasil ditambahkan.</div><br>
 		<div class="row justify-content-center">
 		<div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
+                    echo '<meta http-equiv="refresh" content="1;url=index.php">';
+                }
+            } else {
+                echo '<div class="alert alert-danger" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>         
+                                                            </button>
+                                                            <strong>Gagal!</strong> Ukuran file terlalu besar.</div><br>
+                                                            <div class="row justify-content-center">
+                                                            <div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
+                echo '<meta http-equiv="refresh" content="1;url=index.php">';
+            }
+        } else {
+            echo '<div class="alert alert-danger" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>         
+                                                            </button>
+                                                            <strong>Gagal!</strong> Ekstensi file tidak diperbolehkan.</div><br>
+                                                            <div class="row justify-content-center">
+                                                            <div class="spinner-border" role="status" style="position: absolute;left: 50%;top: 50%;; width: 5rem;height: 5rem"></div></div>';
             echo '<meta http-equiv="refresh" content="1;url=index.php">';
         }
     }

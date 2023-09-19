@@ -70,6 +70,7 @@ if ($_SESSION['status'] == "") {
                             <li><i class="fa fa-users"></i><a href="../mon_peserta/">&nbsp;Peserta</a></li>
                             <li><i class="fa fa-tag"></i><a href="../mon_laporan/">&nbsp;Laporan</a></li>
                             <li><i class="fa fa-check"></i><a href="../lap_penilaian/">&nbsp;Penilaian</a></li>
+                            <li><i class="fa fa-table"></i><a href="../kegiatan/">&nbsp;Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="menu-title">Rekap</li><!-- /.menu-title -->

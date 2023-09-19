@@ -54,7 +54,9 @@ if ($_SESSION['status'] == "") {
 					<li class="menu-item-has-children dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Monitoring</a>
 						<ul class="sub-menu children dropdown-menu">
-							<li><i class="fa fa-tag"></i><a href="#">&nbsp;Laporan</a></li>
+							<li><i class="fa fa-table"></i><a href="absensi/">Absensi</a></li>
+							<li><i class="fa fa-table"></i><a href="../kegiatan/">Kegiatan</a></li>
+							<li><i class="fa fa-tag"></i><a href="../mon_laporan/">&nbsp;Laporan</a></li>
 						</ul>
 					</li>
 					<li class="menu-title">Rekap</li><!-- /.menu-title -->
@@ -138,11 +140,8 @@ if ($_SESSION['status'] == "") {
 								<strong class="card-title">Laporan</strong>
 							</div>
 							<div class="card-body">
-								<?php if ($_SESSION['peserta'] == '0') {
-								} elseif ($_SESSION['peserta'] == '1') { ?>
-									<a href="" class="btn btn-primary" style="float:left;" data-toggle="modal" data-target="#tambah1"><span class="fa fa-plus-square" /> Tambah Data</a><br><br>
-								<?php } else {
-								} ?>
+								<a href="" class="btn btn-primary" style="float:left;" data-toggle="modal" data-target="#tambah1"><span class="fa fa-plus-square" /> Tambah Data</a><br><br>
+
 								<div class="modal fade" id="tambah1" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-scrollable" role="document">
 										<div class="modal-content">
@@ -153,7 +152,7 @@ if ($_SESSION['status'] == "") {
 												</button>
 											</div>
 											<div class="modal-body">
-												<form method="POST" action="add.php">
+												<form method="POST" action="add.php" enctype="multipart/form-data">
 													<div class="form-group-sm">
 														<label for="user">Tanggal :</label>
 														<input type="date" name="tanggal" class="form-control" placeholder="Tanggal" required="required"><br>
@@ -178,6 +177,10 @@ if ($_SESSION['status'] == "") {
 													<div class="form_group-sm">
 														<label for="nim">Kegiatan :</label>
 														<input type="text" name="kegiatan" class="form-control" placeholder="Kegiatan" required="required"><br>
+													</div>
+													<div class="form-group-sm">
+														<label for="dokumen">Dokumen :</label>
+														<input type="file" name="dokumen" class="form-control" accept=".pdf,.doc,.docx">
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -265,7 +268,7 @@ if ($_SESSION['status'] == "") {
 																</button>
 															</div>
 															<div class="modal-body">
-																<form method="POST" action="edit.php?laporan_id=<?php echo $d['laporan_id']; ?>">
+																<form method="POST" action="edit.php?laporan_id=<?php echo $d['laporan_id']; ?>" enctype="multipart/form-data">
 																	<?php
 																	$id = $d['laporan_id'];
 																	$data_edit = mysqli_query($koneksi, "select * from t_laporan join t_peserta on t_laporan.peserta_id = t_peserta.peserta_id where t_laporan.laporan_id = '$id' order by t_laporan.laporan_id asc");
@@ -294,6 +297,10 @@ if ($_SESSION['status'] == "") {
 																			<?php } elseif ($d['laporan_status'] == '2') { ?>
 																				<input type="text" name="kegiatan" class="form-control" value="<?php echo $row['laporan_kegiatan']; ?>" readonly><br>
 																			<?php } ?>
+																		</div>
+																		<div class="form-group-sm">
+																			<label for="dokumen">Dokumen :</label>
+																			<input type="file" name="dokumen" class="form-control" accept=".pdf,.doc,.docx">
 																		</div>
 																		<div class="modal-footer">
 																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
